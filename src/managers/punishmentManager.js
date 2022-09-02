@@ -52,7 +52,7 @@ module.exports.set = async (guild, threshold, action, actionDuration) => {
 }
 
 module.exports.delete = async (guild, threshold) => {
-    PunishmentModel.findOneAndRemove({ guildId: guild.id, threshold });
+    await PunishmentModel.findOneAndRemove({ guildId: guild.id, threshold });
 }
 
 module.exports.getPunishments = async (guild) => {

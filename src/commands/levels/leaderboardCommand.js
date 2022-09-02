@@ -14,7 +14,7 @@ module.exports = {
                 .setColor(Colors.Red)
                 .setDescription(`Le classement est vide`);
 
-            return interaction.reply({ embeds: [leaderboards] });
+            return interaction.reply({ embeds: [noLeaderboard] });
         }
 
         const leaderboard = new EmbedBuilder()

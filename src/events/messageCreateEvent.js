@@ -9,9 +9,10 @@ module.exports = {
     name: `messageCreate`,
     run: async (client, message) => {
         if (message.author.bot) return;
+        if (!message.guild) return;
 
         // === NIVEAU ===
-        levelManager.addXp(message.member, 50);
+        levelManager.addXp(message.member, 10);
 
         // === MODERATION ===
         if (message.content) {

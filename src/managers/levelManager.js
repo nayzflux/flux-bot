@@ -4,7 +4,7 @@ const rewardManager = require(`../managers/rewardManager`);
 const { logs } = require("../helpers/logsHelper");
 
 module.exports.getLeaderboard = async (guild) => {
-    const leaderboard = await LevelModel.find({ guildId: guild.id }).limit(25);
+    const leaderboard = await LevelModel.find({ guildId: guild.id }).limit(25).sort({ xp: -1 });
     return leaderboard || null;
 }
 
