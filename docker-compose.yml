@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  bot:
+    image: nayzbysodium/flux-bot:latest
+    restart: on-failure
+    environment:
+      DISCORD_TOKEN: "secret"
+      MONGO_URL: "secret"
+      SPOTIFY_CLIENT_ID: "secret"
+      SPOTIFY_CLIENT_SECRET: "secret"
+      TZ: "Europe/Paris"
+      SIGHTENGINE_USER: "secret"
+      SIGHTENGINE_SECRET: "secret"
+      PERSPECTIVE_KEY: "secret"
