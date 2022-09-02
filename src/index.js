@@ -22,7 +22,7 @@ require(`./database/mongodb`);
 // Handler
 require(`./handlers/commandsHandler`)(client);
 require(`./handlers/eventsHandler`)(client);
-// require(`./handlers/componentsHandler`)(client);
+require(`./handlers/componentsHandler`)(client);
 client.handleCommands();
 client.handleEvents();
 client.handleComponents();
