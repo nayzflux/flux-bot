@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, SlashCommandChannelOption, ChannelType, PermissionFlagsBits, Colors, Embed, EmbedBuilder, SlashCommandStringOption, SlashCommandRoleOption } = require("discord.js");
+const { logs } = require("../../helpers/logsHelper");
 const configManager = require(`../../managers/configManager`);
 
 module.exports = {
