@@ -367,6 +367,7 @@ const getSongsFromPlaylist = async (link) => {
     try {
         const response = await axios.request(
             {
+                url: `https://api.spotify.com/v1/playlists/${playlistId}?market=FR`,
                 method: `GET`,
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -394,11 +395,6 @@ const getSongsFromPlaylist = async (link) => {
             // get song
             const song = await search(`${name} ${artists}`);
             songs.push(song);
-            // await search(`${name} ${artists}`, (err, song) => {
-            //     songs.push(song);
-
-            //     console.log(`[PLAYLIST] » Song ${song.title} by ${song.publisher} found!`);
-            // });
         }
 
         return songs;

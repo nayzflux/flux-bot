@@ -30,9 +30,11 @@ module.exports = {
                 if (await musicHelper.isValidPlaylistUrl(query)) {
                     const songs = await musicHelper.getSongsFromPlaylist(query);
 
+                    await interaction.editReply(`⏱️ Téléchargement de la playlist en cours`);
+
                     for (const song of songs) {
-                        const song = await musicHelper.getSongFromTrack(query);
                         musicHelper.download(song);
+                        sleep(1 * 1000);
                         musicHelper.addSong(guild.id, song);
                     }
 
@@ -61,6 +63,7 @@ module.exports = {
                     if (!song) return interaction.editReply(`Unknown song`);
 
                     musicHelper.download(song);
+                    sleep(1 * 1000);
                     musicHelper.addSong(guild.id, song);
                     const isPlaying = musicHelper.play(guild.id, voiceChannel);
 
@@ -92,6 +95,7 @@ module.exports = {
                 if (!song) return interaction.editReply(`Unknown song`);
 
                 musicHelper.download(song);
+                sleep(1 * 1000);
                 musicHelper.addSong(guild.id, song);
                 const isPlaying = musicHelper.play(guild.id, voiceChannel);
 
@@ -121,6 +125,7 @@ module.exports = {
             if (!song) return interaction.editReply(`Unknown song`);
 
             musicHelper.download(song);
+            sleep(1 * 1000);
             musicHelper.addSong(guild.id, song);
             const isPlaying = musicHelper.play(guild.id, voiceChannel);
 
@@ -151,4 +156,11 @@ module.exports = {
 
         return interaction.editReply({ embeds: [urlNotSupported] });
     }
+}
+
+const sleep = (millis) => {
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while (curDate - date < millis);
 }
