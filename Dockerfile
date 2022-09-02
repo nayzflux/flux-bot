@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY . .
 
+# update npm
+RUN npm install -g npm@latest
+
 #install node dependencies
 RUN npm install --production-only
 
