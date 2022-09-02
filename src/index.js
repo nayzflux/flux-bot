@@ -1,5 +1,5 @@
 // Variable d'environnement de dév
-require(`dotenv`).config({ path: `.env` });
+// require(`dotenv`).config({ path: `.env` });
 
 const { Client, Collection, User } = require("discord.js");
 
@@ -22,7 +22,7 @@ require(`./database/mongodb`);
 // Handler
 require(`./handlers/commandsHandler`)(client);
 require(`./handlers/eventsHandler`)(client);
-require(`./handlers/componentsHandler`)(client);
+// require(`./handlers/componentsHandler`)(client);
 client.handleCommands();
 client.handleEvents();
 client.handleComponents();
