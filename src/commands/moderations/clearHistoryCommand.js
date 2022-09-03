@@ -29,11 +29,11 @@ module.exports = {
         }
 
         // Supprimer toutes les sanctions
-        await banManager.deleteMemberBans(member);
-        await tempbanManager.deleteMemberTempbans(member);
-        await kickManager.deleteMemberKicks(member);
-        await muteManager.deleteMemberMutes(member);
-        await warnManager.deleteMemberWarings(member);
+        await banManager.deleteMemberBans(target);
+        await tempbanManager.deleteMemberTempbans(target);
+        await kickManager.deleteMemberKicks(target);
+        await muteManager.deleteMemberMutes(target);
+        await warnManager.deleteMemberWarings(target);
 
         const sanctionsDeleted = new EmbedBuilder()
             .setColor(Colors.Green)
