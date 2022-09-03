@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, SlashCommandChannelOption, ChannelType, SlashCommandStringOption, EmbedBuilder, Colors, SlashCommandIntegerOption, PermissionFlagsBits } = require("discord.js");
 const { logs } = require("../../helpers/logsHelper");
-const musicHelper = require(`../../helpers/musicHelper`);
 
 module.exports = {
     data: (new SlashCommandBuilder()

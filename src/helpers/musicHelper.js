@@ -79,22 +79,15 @@ const download = (song) => {
     if (!fs.existsSync(`./temp`)) fs.mkdirSync(`./temp`);
     if (!fs.existsSync(`./temp/musics`)) fs.mkdirSync(`./temp/musics`);
 
-    if (fs.existsSync(`${DOWLOAD_PATH}${song.title}-${song.publisher}.mp3`)) {
-        console.log(`🆗 ${song.title} trouvée dans le cache`);
-        return;
-    }
-
     try {
         const stream = ytdl(song.url, { filter: `audioonly`, quality: `highestaudio` });
 
         console.log(`⏬ Téléchargement de ${song.title} démarré...`);
 
         // download music
-        stream.pipe(fs.createWriteStream(`${DOWLOAD_PATH}${song.title}-${song.publisher}.mp3`));
+        stream.pipe(fs.createWriteStream(`${DOWLOAD_PATH}${song.title}-${song.publisher}.mp3`))
 
-        console.log(`⏬ Téléchargement de ${song.title} terminé...`);
-
-        return;
+        return stream;
     } catch (err) {
         console.log(`❌ Erreur lors du téléchargement de ${song.title}`);
         return;
@@ -151,6 +144,7 @@ const play = (guildId, voiceChannel) => {
         const song = serverQueue.songs[0];
 
         // play first song
+        console.log(Date.now());
         const audioRessource = createAudioResource(`${DOWLOAD_PATH}${song.title}-${song.publisher}.mp3`);
         serverQueue.audioPlayer.play(audioRessource);
 
@@ -191,6 +185,13 @@ const play = (guildId, voiceChannel) => {
     } else {
         return false;
     }
+}
+
+const sleep = (millis) => {
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while (curDate - date < millis);
 }
 
 const clearQueue = (guildId) => {
@@ -304,7 +305,7 @@ const getServerQueue = (guildId) => {
     if (!serverQueue.connection) return;
     if (!serverQueue.audioPlayer) return;
 
-    return;
+    return serverQueue;
 }
 
 const getToken = async () => {
