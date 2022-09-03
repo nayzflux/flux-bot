@@ -162,6 +162,14 @@ module.exports = {
                 return new Date(b.createdAt) - new Date(a.createdAt)
             });
 
+        if (sanctions.length === 0) {
+            const noSanction = new EmbedBuilder()
+                .setColor(Colors.Red)
+                .setDescription(`${target} ne possède pas de sanctions`)
+
+            return interaction.reply({ embeds: [noSanction] });
+        }
+
         const historyEmbed = new EmbedBuilder()
             .setColor(Colors.DarkButNotBlack)
             .setAuthor({ name: `📄 Historique de modération de ${target.user.tag}`, iconURL: target.avatarURL() })

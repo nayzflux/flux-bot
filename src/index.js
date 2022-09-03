@@ -1,5 +1,5 @@
 // Variable d'environnement de dév
-require(`dotenv`).config({ path: `.env` });
+// require(`dotenv`).config({ path: `.env` });
 
 const { Client, Collection, User } = require("discord.js");
 

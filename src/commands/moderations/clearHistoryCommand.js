@@ -36,9 +36,9 @@ module.exports = {
         await warnManager.deleteMemberWarings(member);
 
         const sanctionsDeleted = new EmbedBuilder()
-        .setColor(Colors.Green)
-        .setDescription(`Toutes les sanctions de ${target} ont été supprimé`)
+            .setColor(Colors.Green)
+            .setDescription(`Toutes les sanctions de ${target} ont été supprimé`)
 
-    return interaction.reply({ embeds: [sanctionsDeleted] });
+        return interaction.reply({ embeds: [sanctionsDeleted] });
     }
 }
