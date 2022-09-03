@@ -63,7 +63,7 @@ module.exports = {
                 }
 
                 if (await musicHelper.isValidTrackUrl(query)) {
-                    const song = await musicHelper.search(query);
+                    const song = await musicHelper.getSongFromTrack(query);
 
                     if (!song) return interaction.editReply(`❌ Musique introuvable`);
 
