@@ -27,7 +27,7 @@ module.exports.getRewards = async (guild) => {
 }
 
 module.exports.handleMemberRewards = async (member, level) => {
-    const rewards = await this.getRewards(member.guild)
+    const rewards = await this.getRewards(member.guild);
 
     for (const reward of rewards) {
         const role = await member.guild.roles.fetch(reward.roleId);

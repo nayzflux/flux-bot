@@ -66,7 +66,7 @@ const checkCreate = async (guild, member, newState) => {
     const config = await configManager.getConfig(guild);
 
     if (newState.channel.id === config?.privateRoom?.channelId) {
-        guild.channels.create({ name: `🔰・Salon de ${member.displayName}`, parent: newState.channel.parent, position: newState.channel.position + 1, type: ChannelType.GuildVoice }).then(channel => {
+        guild.channels.create({ name: `🔊〡Salon de ${member.displayName}`, parent: newState.channel.parent, position: newState.channel.position + 1, type: ChannelType.GuildVoice }).then(channel => {
             member.voice.setChannel(channel);
             privateRoomManager.add(channel);
             console.log(`🔐 Salon créé par ${member.user.tag}`);

@@ -53,13 +53,13 @@ module.exports = {
                     .setColor(Colors.Fuchsia)
                     .setAuthor({ name: `Liste des récompenses de niveaux`, iconURL: guild.iconURL() });
 
-                const str = ``;
+                let str = ``;
 
                 for (const reward of rewards) {
                     const role = await guild.roles.fetch(reward.roleId);
 
                     if (role) {
-                        str = str = `${reward.level} - ${role}\n`
+                        str = str + `${reward.level} - ${role}\n`
                     }
                 }
 
