@@ -29,3 +29,12 @@ module.exports.unmute = async (member, reason) => {
     logs(member.guild, `${member.user.tag} n'est plus muet pour ${reason}`, Colors.Red);
     console.log(`🔇 ${member.guild.name} : ${member.user.tag} n'est plus muet pour ${reason}`);
 }
+
+module.exports.getMemberMutes = async (member) => {
+    const mutes = await MuteModel.find({guildId: member.guild.id, userId: member.user.id});
+    return mutes || null;
+}
+
+module.exports.deleteMemberMutes = async (member) => {
+    await MuteModel.deleteMany({ guildId: member.guild.id, userId: member.user.id });
+}

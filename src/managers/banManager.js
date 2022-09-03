@@ -28,3 +28,12 @@ module.exports.unban = async (guild, user, reason) => {
     logs(guild, `${user.tag} a été débanni pour ${reason}`, Colors.Red);
     console.log(`🔨 ${guild.name} : ${user.tag} a été débanni pour ${reason}`);
 }
+
+module.exports.getMemberBans = async (member) => {
+    const bans = await BanModel.find({ guildId: member.guild.id, userId: member.user.id });
+    return bans || null;
+}
+
+module.exports.deleteMemberBans = async (member) => {
+    await BanModel.deleteMany({ guildId: member.guild.id, userId: member.user.id });
+}

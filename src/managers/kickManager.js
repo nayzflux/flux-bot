@@ -13,3 +13,12 @@ module.exports.kick = async (member, moderator, reason) => {
     logs(member.guild, `${member.user.tag} a été expulsé par ${moderator.user.tag} pour ${reason}`, Colors.Red);
     console.log(`🔨 ${member.guild.name} : ${member.user.tag} a été expulsé par ${moderator.user.tag} pour ${reason}`);
 }
+
+module.exports.getMemberKicks = async (member) => {
+    const kicks = await KickModel.find({guildId: member.guild.id, userId: member.user.id});
+    return kicks || null;
+}
+
+module.exports.deleteMemberKicks = async (member) => {
+    await KickModel.deleteMany({ guildId: member.guild.id, userId: member.user.id });
+}

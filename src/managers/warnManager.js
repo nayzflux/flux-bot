@@ -14,3 +14,12 @@ module.exports.warn = async (member, moderator, reason) => {
     console.log(`⚠️ ${member.guild.name} : ${member.user.tag} a été averti par ${moderator.user.tag} pour ${reason}`);
     punishmentManager.handleMemberPunishment(member, moderator, reason);
 }
+
+module.exports.getMemberWarnings = async (member) => {
+    const warnings = await WarnModel.find({guildId: member.guild.id, userId: member.user.id});
+    return warnings || null;
+}
+
+module.exports.deleteMemberWarings = async (member) => {
+    await WarnModel.deleteMany({ guildId: member.guild.id, userId: member.user.id });
+}
