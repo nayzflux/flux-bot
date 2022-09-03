@@ -33,9 +33,9 @@ module.exports = {
             const joinedAt = map.get(oldState.member.id);
 
             if (joinedAt) {
-                const minutes = new Date(Date.now() - joinedAt).getMinutes();
+                const minutes = Math.round((Date.now() - joinedAt) / 1000 / 60);
                 levelManager.addXp(member, minutes * XP_AMOUNT);
-                console.log(minutes * XP_AMOUNT);
+                console.log(minutes);
             }
         }
 
@@ -50,13 +50,14 @@ module.exports = {
 
             // NIVEAU
             const joinedAt = map.get(newState.member.id);
-            map.set(newState.member.id, Date.now());
 
             if (joinedAt) {
-                const minutes = new Date(Date.now() - joinedAt).getMinutes();
+                const minutes = Math.round((Date.now() - joinedAt) / 1000 / 60);
                 levelManager.addXp(member, minutes * XP_AMOUNT);
-                console.log(minutes * XP_AMOUNT);
+                console.log(minutes);
             }
+
+            map.set(newState.member.id, Date.now());
         }
     }
 }
