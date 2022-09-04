@@ -1,9 +1,9 @@
 // Variable d'environnement de dév
 // require(`dotenv`).config({ path: `.env` });
 
-const { Client, Collection, User } = require("discord.js");
+const { Client, Collection, User, Partials } = require("discord.js");
 
-const client = new Client({ intents: 3276799 });
+const client = new Client({ partials: [Partials.Reaction, Partials.Message, Partials.Channel], intents: 3276799 });
 client.commands = new Collection();
 client.slashCommands = [];
 client.buttons = new Collection();
