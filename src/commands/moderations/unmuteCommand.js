@@ -4,6 +4,10 @@ const ms = require(`ms`);
 const moment = require(`moment`);
 
 module.exports = {
+    category: {
+        name: `Modération`,
+        emoji: `⛔`
+    },
     data: (new SlashCommandBuilder()
         .setName(`unmute`)
         .setDescription(`Démute un membre`)

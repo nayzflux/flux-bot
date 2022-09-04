@@ -2,6 +2,10 @@ const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, Sl
 const configManager = require(`../../managers/configManager`);
 
 module.exports = {
+    category: {
+        name: `Configuration`,
+        emoji: `⚙️`
+    },
     data: (new SlashCommandBuilder()
         .setName(`join-message`)
         .addSubcommand(

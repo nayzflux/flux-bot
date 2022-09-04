@@ -2,6 +2,10 @@ const { CommandInteraction, Client, Colors, EmbedBuilder, ButtonStyle, ActionRow
 const kickManager = require(`../../managers/kickManager`);
 
 module.exports = {
+    category: {
+        name: `Modération`,
+        emoji: `⛔`
+    },
     data: (new SlashCommandBuilder()
         .setName(`kick`)
         .setDescription(`Expulser un membre`)

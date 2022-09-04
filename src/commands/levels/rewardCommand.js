@@ -2,6 +2,10 @@ const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, Sl
 const rewardManager = require(`../../managers/rewardManager`);
 
 module.exports = {
+    category: {
+        name: `Niveau & XP`,
+        emoji: `📊`
+    },
     data: (new SlashCommandBuilder()
         .setName(`reward`)
         .addSubcommand(

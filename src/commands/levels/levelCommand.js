@@ -2,6 +2,10 @@ const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, Sl
 const levelManager = require(`../../managers/levelManager`);
 
 module.exports = {
+    category: {
+        name: `Niveau & XP`,
+        emoji: `📊`
+    },
     data: (new SlashCommandBuilder()
         .setName(`level`)
         .setDescription(`Gérer le système de niveau`)

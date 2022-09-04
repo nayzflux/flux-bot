@@ -2,6 +2,10 @@ const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, Sl
 const { logs } = require("../../helpers/logsHelper");
 
 module.exports = {
+    category: {
+        name: `Modération`,
+        emoji: `⛔`
+    },
     data: (new SlashCommandBuilder()
         .setName(`purge`)
         .setDescription(`Supprimer un certain nombre de messages`)

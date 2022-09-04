@@ -3,6 +3,10 @@ const { logs } = require("../../helpers/logsHelper");
 const configManager = require(`../../managers/configManager`);
 
 module.exports = {
+    category: {
+        name: `Configuration`,
+        emoji: `⚙️`
+    },
     data: (new SlashCommandBuilder()
         .setName(`autorole`)
         .addSubcommand(

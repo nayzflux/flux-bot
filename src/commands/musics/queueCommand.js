@@ -2,6 +2,10 @@ const { SlashCommandBuilder, ActionRowBuilder, SlashCommandSubcommandBuilder, Sl
 const musicHelper = require(`../../helpers/musicHelper`);
 
 module.exports = {
+    category: {
+        name: `Musique`,
+        emoji: `🎧`
+    },
     data: (new SlashCommandBuilder()
         .setName(`queue`)
         .setDescription(`Afficher la file de lecture`)

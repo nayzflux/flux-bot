@@ -2,6 +2,10 @@ const { CommandInteraction, Client, Colors, EmbedBuilder, ButtonStyle, ActionRow
 const warnManager = require(`../../managers/warnManager`);
 
 module.exports = {
+    category: {
+        name: `Modération`,
+        emoji: `⛔`
+    },
     data: (new SlashCommandBuilder()
         .setName(`warn`)
         .setDescription(`Avertir un membre`)

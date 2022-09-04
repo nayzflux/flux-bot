@@ -4,12 +4,16 @@ const punishmentManager = require(`../../managers/punishmentManager`);
 const moment = require(`moment`)
 
 module.exports = {
+    category: {
+        name: `Modération`,
+        emoji: `⛔`
+    },
     data: (new SlashCommandBuilder()
-        .setName(`punishment`)
+        .setName(`autopunish`)
         .addSubcommand(
             new SlashCommandSubcommandBuilder()
-                .setName(`set`)
-                .setDescription(`Définir une punition`)
+                .setName(`add`)
+                .setDescription(`Définir une punition automatique`)
                 .addIntegerOption(
                     new SlashCommandIntegerOption()
                         .setName(`avertissement`)
@@ -33,7 +37,7 @@ module.exports = {
                         .setRequired(false)))
         .addSubcommand(
             new SlashCommandSubcommandBuilder()
-                .setName(`delete`)
+                .setName(`remove`)
                 .setDescription(`Supprimer une punition`)
                 .addIntegerOption(
                     new SlashCommandIntegerOption()
@@ -64,7 +68,7 @@ module.exports = {
                 interaction.reply({ embeds: [embed] });
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor(Colors.Fuchsia)
+                    .setColor(Colors.Orange)
                     .setAuthor({ name: `Liste des punitions`, iconURL: guild.iconURL() });
 
                 let str = ``;
@@ -81,7 +85,7 @@ module.exports = {
                         actionStr = `Mute temporaire (${moment.duration(punishment.actionDuration).humanize()})`;
                     }
 
-                    str = str = `${punishment.threshold} avertissement - ${actionStr}\n`
+                    str = str + `${punishment.threshold} avertissement - ${actionStr}\n`
                 }
 
                 embed.setDescription(str);
@@ -90,7 +94,7 @@ module.exports = {
             }
         }
 
-        if (subcommand === `set`) {
+        if (subcommand === `add`) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator) && !member.permissions.has(PermissionFlagsBits.ManageGuild)) {
                 const permissionMissingEmbed = new EmbedBuilder()
                     .setColor(Colors.Red)
@@ -184,7 +188,7 @@ module.exports = {
             }
         }
 
-        if (subcommand === `delete`) {
+        if (subcommand === `remove`) {
             if (!member.permissions.has(PermissionFlagsBits.Administrator) && !member.permissions.has(PermissionFlagsBits.ManageGuild)) {
                 const permissionMissingEmbed = new EmbedBuilder()
                     .setColor(Colors.Red)

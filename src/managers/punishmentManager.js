@@ -1,4 +1,4 @@
-const { GuildMember } = require("discord.js");
+const { GuildMember, Colors } = require("discord.js");
 const PunishmentModel = require("../models/punishmentModel");
 const WarnModel = require("../models/warnModel");
 const banManager = require(`./banManager`);
