@@ -11,8 +11,13 @@ module.exports.removeReactionRole = async (_id) => {
 }
 
 module.exports.getReactionRole = async (message, emoji) => {
-    const reactionRoles = await ReactionModel.findOne({ guildId: message.guild.id, channelId: message.channel.id,  messageId: message.id, emoji });
-    return reactionRoles;
+    const reactionRole = await ReactionModel.findOne({ guildId: message.guild.id, channelId: message.channel.id,  messageId: message.id, emoji });
+    return reactionRole;
+}
+
+module.exports.getReactionRoleById = async (_id) => {
+    const reactionRole = await ReactionModel.findOne({ _id });
+    return reactionRole;
 }
 
 module.exports.getReactionRoles = async (guild) => {
