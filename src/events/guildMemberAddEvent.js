@@ -6,6 +6,8 @@ const { logs } = require('../helpers/logsHelper');
 module.exports = {
     name: `guildMemberAdd`,
     run: async (client, member) => {
+        if (member.user.bot) return;
+
         const { guild } = member;
 
         const config = await configManager.getConfig(guild);
