@@ -97,47 +97,55 @@ module.exports = {
                             return interaction.editReply({ embeds: [songPlayingNowEmbed] });
                         }
                     });
+
+                    return;
                 }
+            }
 
-                if (musicHelper.isYoutubeUrl(query)) {
-                    const song = await musicHelper.search(query);
+            if (musicHelper.isYoutubeUrl(query)) {
+                console.log("youtube");
 
-                    if (!song) return interaction.editReply(`❌ Musique introuvable`);
+                const song = await musicHelper.search(query);
 
-                    const stream = musicHelper.download(song);
+                console.log(song, query);
 
-                    stream.on(`finish`, () => {
-                        musicHelper.addSong(guild.id, song);
-                        const isPlaying = musicHelper.play(guild.id, voiceChannel);
+                if (!song) return interaction.editReply(`❌ Musique introuvable`);
 
-                        if (isPlaying) {
-                            const songPlayingNowEmbed = new EmbedBuilder()
-                                .setColor(Colors.Aqua)
-                                .setAuthor({ name: `En cours de lecture... 🎵` })
-                                .setDescription(`[${song.title}](${song.url})`)
-                                .setThumbnail(song.thumbnail)
-                                .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
+                const stream = musicHelper.download(song);
 
-                            return interaction.editReply({ embeds: [songPlayingNowEmbed] });
-                        } else {
-                            const songPlayingNowEmbed = new EmbedBuilder()
-                                .setColor(Colors.Aqua)
-                                .setAuthor({ name: `Ajoutée dans la file de lecture 🎵` })
-                                .setDescription(`[${song.title}](${song.url})`)
-                                .setThumbnail(song.thumbnail)
-                                .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
+                console.log("stream");
 
-                            return interaction.editReply({ embeds: [songPlayingNowEmbed] });
-                        }
-                    });
-                }
+                stream.on(`finish`, () => {
+                    musicHelper.addSong(guild.id, song);
+                    const isPlaying = musicHelper.play(guild.id, voiceChannel);
+
+                    if (isPlaying) {
+                        const songPlayingNowEmbed = new EmbedBuilder()
+                            .setColor(Colors.Aqua)
+                            .setAuthor({ name: `En cours de lecture... 🎵` })
+                            .setDescription(`[${song.title}](${song.url})`)
+                            .setThumbnail(song.thumbnail)
+                            .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
+
+                        return interaction.editReply({ embeds: [songPlayingNowEmbed] });
+                    } else {
+                        const songPlayingNowEmbed = new EmbedBuilder()
+                            .setColor(Colors.Aqua)
+                            .setAuthor({ name: `Ajoutée dans la file de lecture 🎵` })
+                            .setDescription(`[${song.title}](${song.url})`)
+                            .setThumbnail(song.thumbnail)
+                            .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
+
+                        return interaction.editReply({ embeds: [songPlayingNowEmbed] });
+                    }
+                });
+                
+                return;
             }
         } else {
             const song = await musicHelper.search(query);
 
             if (!song) return interaction.editReply(`❌ Musique introuvable`);
-
-            console.log(song);
 
             const stream = musicHelper.download(song);
 
@@ -165,6 +173,8 @@ module.exports = {
                     return interaction.editReply({ embeds: [songPlayingNowEmbed] });
                 }
             });
+
+            return;
         }
 
         const urlNotSupported = new EmbedBuilder()
