@@ -45,12 +45,24 @@ module.exports = {
                 if (response.first() && response.first().content === code) {
                     response.first().delete().catch(err => console.log(`❌ Impossible de supprimer le message`));
                     m1.delete().catch(err => console.log(`❌ Impossible de supprimer le message`));
+
+                    // BYPASS
+                    if (client.bypass.has(member)) {
+                        return;
+                    }
+
                     member.roles.add(role).catch(err => console.log(`❌ Impossible de donner le rôle`));
 
                     logs(guild, `${member.user.tag} (${member.user.id}) a réussi la verification anti-robot`, Colors.Green);
                 } else {
                     if (response.first()) response.first().delete().catch(err => console.log(`❌ Impossible de supprimer le message`));
                     m1.delete().catch(err => console.log(`❌ Impossible de supprimer le message`));
+
+                    // BYPASS
+                    if (client.bypass.has(member)) {
+                        return;
+                    }
+
                     const kicked = new EmbedBuilder()
                         .setColor(Colors.Red)
                         .setDescription(`La verification anti-robot à échoué, vous avez été expulsé`);

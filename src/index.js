@@ -8,6 +8,7 @@ client.commands = new Collection();
 client.slashCommands = [];
 client.buttons = new Collection();
 client.selectMenus = new Collection();
+client.bypass = new Collection();
 
 // Base de donnés
 require(`./database/mongodb`);
