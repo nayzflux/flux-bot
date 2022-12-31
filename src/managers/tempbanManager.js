@@ -30,17 +30,20 @@ module.exports.tempban = async (member, moderator, reason, duration) => {
 }
 
 module.exports.unban = async (guild, user, reason) => {
-    guild.bans.remove(user.id, reason).catch(err => {
-        console.log(`❌ ${guild.name} : Impossible de débannir ${user.tag}`);
-    });
+    await TempbanModel.findOneAndUpdate({ guildId: guild.id, userId: user.id, expired: false }, { expired: true });
 
-    // === LOGS ===
-    logs(guild, `${user.tag} a été débanni pour ${reason}`, Colors.Red);
-    console.log(`🔨 ${guild.name} : ${user.tag} a été débanni pour ${reason}`);
+    guild.bans.remove(user.id, reason)
+        .then(() => {
+            // === LOGS ===
+            logs(guild, `${user.tag} a été débanni pour ${reason}`, Colors.Red);
+            console.log(`🔨 ${guild.name} : ${user.tag} a été débanni pour ${reason}`);
+        }).catch(err => {
+            console.log(`❌ ${guild.name} : Impossible de débannir ${user.tag}`);
+        });
 }
 
 module.exports.getMemberTempbans = async (member) => {
-    const tempbans = await TempbanModel.find({guildId: member.guild.id, userId: member.user.id});
+    const tempbans = await TempbanModel.find({ guildId: member.guild.id, userId: member.user.id });
     return tempbans || null;
 }
 

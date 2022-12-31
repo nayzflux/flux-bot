@@ -22,6 +22,11 @@ const tempbanSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    expired: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
     expiresAt: {
         type: Date,
         required: true
