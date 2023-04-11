@@ -10,8 +10,7 @@ RUN npm install -g npm@latest
 #install node dependencies
 RUN npm install --production-only
 
-RUN npm install ytdl-core@latest
-RUN npm i fent/node-ytdl-core#pull/1203/head
+RUN npm install ytdl-core@4.9.1
 
 # install ffmpeg
 RUN apt-get update -y
