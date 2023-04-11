@@ -10,6 +10,8 @@ RUN npm install -g npm@latest
 #install node dependencies
 RUN npm install --production-only
 
+RUN npm install ytdl-core@latest
+
 # install ffmpeg
 RUN apt-get update -y
 RUN apt-get install ffmpeg -y
