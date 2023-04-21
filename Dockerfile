@@ -12,11 +12,12 @@ RUN npm install --production-only
 
 # RUN npm install ytdl-core@4.9.1
 
-RUN apt-get install yt-dlp
-
 # install ffmpeg
 RUN apt-get update -y
 RUN apt-get install ffmpeg -y
+
+# install YT-DLP
+RUN apt-get install yt-dlp
 
 # create temporary directory
 RUN mkdir ./temp
