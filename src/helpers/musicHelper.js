@@ -79,19 +79,25 @@ const download = (song) => {
     if (!fs.existsSync(`./temp`)) fs.mkdirSync(`./temp`);
     if (!fs.existsSync(`./temp/musics`)) fs.mkdirSync(`./temp/musics`);
 
-    try {
-        const stream = ytdl(song.url, { filter: `audioonly`, quality: `highestaudio` });
+    // NEW VERSION
+    console.log(`⏬ Téléchargement de ${song.title} démarré...`);
+    console.log('cd ./temp/musics && yt-dlp -f bestaudio -x --audio-format mp3 -o "' + DOWLOAD_PATH + song.title + '-' + song.publisher + '.mp3" ' + url);
+    return cmd.runSync('cd ./temp/musics && yt-dlp -f bestaudio -x --audio-format mp3 -o "' + DOWLOAD_PATH + song.title + '-' + song.publisher + '.mp3" ' + url);
 
-        console.log(`⏬ Téléchargement de ${song.title} démarré...`);
+    // OLD VERSION
+    // try {
+    //     const stream = ytdl(song.url, { filter: `audioonly`, quality: `highestaudio` });
 
-        // download music
-        stream.pipe(fs.createWriteStream(`${DOWLOAD_PATH}${song.title}-${song.publisher}.mp3`))
+    //     console.log(`⏬ Téléchargement de ${song.title} démarré...`);
 
-        return stream;
-    } catch (err) {
-        console.log(`❌ Erreur lors du téléchargement de ${song.title}`);
-        return;
-    }
+    //     // download music
+    //     stream.pipe(fs.createWriteStream(`${DOWLOAD_PATH}${song.title}-${song.publisher}.mp3`))
+
+    //     return stream;
+    // } catch (err) {
+    //     console.log(`❌ Erreur lors du téléchargement de ${song.title}`);
+    //     return;
+    // }
 }
 
 const addSong = (guildId, song) => {

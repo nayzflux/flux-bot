@@ -35,45 +35,10 @@ module.exports = {
                     const songs = await musicHelper.getSongsFromPlaylist(query);
 
                     for (const song of songs) {
-                        const stream = musicHelper.download(song);
+                        // const stream = musicHelper.download(song);
+                        musicHelper.download(song);
 
-                        stream.on(`finish`, () => {
-                            musicHelper.addSong(guild.id, song);
-                            const isPlaying = musicHelper.play(guild.id, voiceChannel);
-
-                            if (isPlaying) {
-                                const songPlayingNowEmbed = new EmbedBuilder()
-                                    .setColor(Colors.Aqua)
-                                    .setAuthor({ name: `En cours de lecture... 🎵` })
-                                    .setDescription(`[${song.title}](${song.url})`)
-                                    .setThumbnail(song.thumbnail)
-                                    .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
-
-                                return interaction.editReply({ embeds: [songPlayingNowEmbed] });
-                            } else {
-                                const songPlayingNowEmbed = new EmbedBuilder()
-                                    .setColor(Colors.Aqua)
-                                    .setAuthor({ name: `Ajoutée dans la file de lecture 🎵` })
-                                    .setDescription(`[${song.title}](${song.url})`)
-                                    .setThumbnail(song.thumbnail)
-                                    .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
-
-                                return interaction.editReply({ embeds: [songPlayingNowEmbed] });
-                            }
-                        });
-                    }
-
-                    return;
-                }
-
-                if (await musicHelper.isValidTrackUrl(query)) {
-                    const song = await musicHelper.getSongFromTrack(query);
-
-                    if (!song) return interaction.editReply(`❌ Musique introuvable`);
-
-                    const stream = musicHelper.download(song);
-
-                    stream.on(`finish`, () => {
+                        // stream.on(`finish`, () => {
                         musicHelper.addSong(guild.id, song);
                         const isPlaying = musicHelper.play(guild.id, voiceChannel);
 
@@ -96,26 +61,21 @@ module.exports = {
 
                             return interaction.editReply({ embeds: [songPlayingNowEmbed] });
                         }
-                    });
+                        // });
+                    }
 
                     return;
                 }
-            }
 
-            if (musicHelper.isYoutubeUrl(query)) {
-                console.log("youtube");
+                if (await musicHelper.isValidTrackUrl(query)) {
+                    const song = await musicHelper.getSongFromTrack(query);
 
-                const song = await musicHelper.search(query);
+                    if (!song) return interaction.editReply(`❌ Musique introuvable`);
 
-                console.log(song, query);
+                    // const stream = musicHelper.download(song);
+                    musicHelper.download(song);
 
-                if (!song) return interaction.editReply(`❌ Musique introuvable`);
-
-                const stream = musicHelper.download(song);
-
-                console.log("stream");
-
-                stream.on(`finish`, () => {
+                    // stream.on(`finish`, () => {
                     musicHelper.addSong(guild.id, song);
                     const isPlaying = musicHelper.play(guild.id, voiceChannel);
 
@@ -138,18 +98,27 @@ module.exports = {
 
                         return interaction.editReply({ embeds: [songPlayingNowEmbed] });
                     }
-                });
-                
-                return;
+                    // });
+
+                    return;
+                }
             }
-        } else {
-            const song = await musicHelper.search(query);
 
-            if (!song) return interaction.editReply(`❌ Musique introuvable`);
+            if (musicHelper.isYoutubeUrl(query)) {
+                console.log("youtube");
 
-            const stream = musicHelper.download(song);
+                const song = await musicHelper.search(query);
 
-            stream.on(`finish`, () => {
+                console.log(song, query);
+
+                if (!song) return interaction.editReply(`❌ Musique introuvable`);
+
+                // const stream = musicHelper.download(song);
+                musicHelper.download(song);
+
+                console.log("stream");
+
+                // stream.on(`finish`, () => {
                 musicHelper.addSong(guild.id, song);
                 const isPlaying = musicHelper.play(guild.id, voiceChannel);
 
@@ -172,7 +141,42 @@ module.exports = {
 
                     return interaction.editReply({ embeds: [songPlayingNowEmbed] });
                 }
-            });
+                // });
+
+                return;
+            }
+        } else {
+            const song = await musicHelper.search(query);
+
+            if (!song) return interaction.editReply(`❌ Musique introuvable`);
+
+            // const stream = musicHelper.download(song);
+            musicHelper.download(song);
+
+            // stream.on(`finish`, () => {
+            musicHelper.addSong(guild.id, song);
+            const isPlaying = musicHelper.play(guild.id, voiceChannel);
+
+            if (isPlaying) {
+                const songPlayingNowEmbed = new EmbedBuilder()
+                    .setColor(Colors.Aqua)
+                    .setAuthor({ name: `En cours de lecture... 🎵` })
+                    .setDescription(`[${song.title}](${song.url})`)
+                    .setThumbnail(song.thumbnail)
+                    .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
+
+                return interaction.editReply({ embeds: [songPlayingNowEmbed] });
+            } else {
+                const songPlayingNowEmbed = new EmbedBuilder()
+                    .setColor(Colors.Aqua)
+                    .setAuthor({ name: `Ajoutée dans la file de lecture 🎵` })
+                    .setDescription(`[${song.title}](${song.url})`)
+                    .setThumbnail(song.thumbnail)
+                    .addFields({ name: `Par`, value: `${song.publisher}`, inline: true }, { name: `Durée`, value: `\`${song.duration}\``, inline: true })
+
+                return interaction.editReply({ embeds: [songPlayingNowEmbed] });
+            }
+            // });
 
             return;
         }
