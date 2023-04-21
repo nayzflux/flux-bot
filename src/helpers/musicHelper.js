@@ -1,4 +1,5 @@
 const ytSearch = require(`yt-search`);
+const cmd = require('node-cmd')
 const ytdl = require(`ytdl-core`);
 const fs = require(`fs`);
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus } = require(`@discordjs/voice`);
