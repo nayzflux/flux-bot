@@ -81,8 +81,8 @@ const download = (song) => {
 
     // NEW VERSION
     console.log(`⏬ Téléchargement de ${song.title} démarré...`);
-    console.log('cd ./temp/musics && yt-dlp -f bestaudio -x --audio-format mp3 -o "' + DOWLOAD_PATH + song.title + '-' + song.publisher + '.mp3" ' + url);
-    return cmd.runSync('cd ./temp/musics && yt-dlp -f bestaudio -x --audio-format mp3 -o "' + DOWLOAD_PATH + song.title + '-' + song.publisher + '.mp3" ' + url);
+    console.log('cd ./temp/musics && yt-dlp -f bestaudio -x --audio-format mp3 -o "' + DOWLOAD_PATH + song.title + '-' + song.publisher + '.mp3" ' + song.url);
+    return cmd.runSync('cd ./temp/musics && yt-dlp -f bestaudio -x --audio-format mp3 -o "' + DOWLOAD_PATH + song.title + '-' + song.publisher + '.mp3" ' + song.url);
 
     // OLD VERSION
     // try {
