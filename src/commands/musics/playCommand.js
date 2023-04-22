@@ -16,6 +16,13 @@ module.exports = {
     ),
     run: async (client, interaction) => {
         const { guild, member } = interaction;
+
+        // disabled module
+        const error = new EmbedBuilder()
+            .setColor(Colors.Yellow)
+            .setDescription(`⚠️ Le module de musique est désormais désactivé sur <@1013156960167800893> !\n➡️ Merci d'utiliser !play avec <@1099354786245120080>\n📗 Avancement: https://github.com/nayzflux/soundwave-bot`)
+        return interaction.reply({ embeds: [error] });
+
         const voiceChannel = member.voice.channel;
         const query = interaction.options.getString(`musique`);
 
